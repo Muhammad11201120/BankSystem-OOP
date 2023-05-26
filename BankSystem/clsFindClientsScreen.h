@@ -35,7 +35,7 @@ public:
 		system( "cls" );
 		_DrawScreenHeader( "FIND CLIENT SCREEN" );
 		string accountNumber = "";
-		cout << "Enter An Account Number To Delete: ";
+		cout << "Enter An Account Number To Show: ";
 		accountNumber = clsInputValidate::ReadString();
 
 		while ( !clsBankClient::isClientExists( accountNumber ) )

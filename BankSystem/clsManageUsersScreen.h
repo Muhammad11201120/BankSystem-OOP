@@ -5,6 +5,8 @@
 #include"clsMainMenueScreen.h"
 #include"clsUsersList.h"
 #include"clsAddNewUserScreen.h"
+#include"clsDeleteUser.h"
+#include"clsUpdateUserScreen.h"
 using namespace std;
 class clsManageUsersScreen :protected clsScreen
 {
@@ -42,11 +44,11 @@ private:
 	}
 	static void _showUpdasteUserScreen()
 	{
-		cout << "Update User Will Be Here.." << endl;
+		clsUpdateUserScreen::UpdateUserScreen();
 	}
 	static void _showDeleteUSerScreen()
 	{
-		cout << "Delete User Will Be Here.." << endl;
+		clsDeleteUser::DeleteUserScreen();
 	}
 	static void _showFindUserScreen()
 	{
@@ -54,7 +56,8 @@ private:
 	}
 	static void _BackToUsersMainMenueScreen()
 	{
-		cout << "Back To Users Main Menue Will Be Here.." << endl;
+		system( "pause>0" );
+		ManageUsersScreen();
 	}
 	static void _performUsersMenueOptions( enManageUsersOptions option )
 	{

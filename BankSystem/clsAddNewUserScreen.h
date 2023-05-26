@@ -72,7 +72,8 @@ private:
 		user.setPhone( clsInputValidate::ReadString() );
 		cout << "Enter Password: ";
 		user.setPassword( clsInputValidate::ReadString() );
-		user.setPremissions( clsAddNewUserScreen::ReadUserPremission() );
+		cout << "Enter Permissions: \n" << endl;
+		user.setPremissions( ReadUserPremission() );
 		return user;
 	}
 	static void _printUserData( clsUsers user )

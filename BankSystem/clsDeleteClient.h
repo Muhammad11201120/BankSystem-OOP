@@ -51,7 +51,7 @@ public:
 		{
 			if ( client.Delete() )
 			{
-				cout << "Client Account Deleted Successgully.." << endl;
+				cout << "Client Account Deleted Successfuly.." << endl;
 				_printClientData( client );
 			}
 			else
