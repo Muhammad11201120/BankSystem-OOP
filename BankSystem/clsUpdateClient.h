@@ -49,6 +49,10 @@ public:
 	static void updateClientScreen()
 	{
 		system( "cls" );
+		if ( !CheckAccessRights( clsUsers::enPremissions::pUpdateClients ) )
+		{
+			return;
+		}
 		_DrawScreenHeader( "UPDATE CLIENT SCREEN" );
 		string accountNumber = "";
 		cout << "Enter An Account Number To Find : ";

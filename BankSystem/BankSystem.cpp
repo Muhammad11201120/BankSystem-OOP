@@ -1,8 +1,15 @@
 #include <iostream>
-#include"clsMainMenueScreen.h"
+#include "clsLoginScreen.h"
 
 int main()
+
 {
-	clsMainMenueScreen::GetMainMenueScreen();
+	while ( true )
+	{
+		if ( !clsLoginScreen::ShowLoginScreen() )
+		{
+			break;
+		}
+	}
 	return 0;
 }

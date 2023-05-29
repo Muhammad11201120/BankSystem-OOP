@@ -33,6 +33,10 @@ public:
 	static void FindClientScreen()
 	{
 		system( "cls" );
+		if ( !CheckAccessRights( clsUsers::enPremissions::pFindClients ) )
+		{
+			return;
+		}
 		_DrawScreenHeader( "FIND CLIENT SCREEN" );
 		string accountNumber = "";
 		cout << "Enter An Account Number To Show: ";

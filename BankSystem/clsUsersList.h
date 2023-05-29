@@ -23,6 +23,10 @@ public:
 	static void UsersListScreen()
 	{
 		system( "cls" );
+		if ( !CheckAccessRights( clsUsers::enPremissions::pListClients ) )
+		{
+			return;
+		}
 		vector <clsUsers> vUsers = clsUsers::GetUsersList();
 		string Title = "USERS LIST SCREEN";
 		string SubTitle = "\t    (" + to_string( vUsers.size() ) + ") User(s).";

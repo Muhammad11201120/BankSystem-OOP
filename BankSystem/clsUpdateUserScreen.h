@@ -81,6 +81,12 @@ private:
 		{
 			premission += clsUsers::enPremissions::pManagUsers;
 		}
+		cout << "Do You Want To Give This User Access To To See Login Rigester ? : ";
+		cin >> answer;
+		if ( answer == 'y' || answer == 'Y' )
+		{
+			premission += clsUsers::enPremissions::pShowLog;
+		}
 		return premission;
 	}
 	static clsUsers _readUserInfo( clsUsers& user )

@@ -7,7 +7,9 @@
 #include"clsScreen.h"
 #include"clsInputValidate.h"
 #include"clsString.h"
-
+#include"Global.h"
+#include"clsDate.h"
+#include<string>
 using namespace std;
 class clsUsers :public clsPerson
 {
@@ -60,6 +62,25 @@ private:
 
 		return vClients;
 	}
+	struct stLogRigester;
+	static  stLogRigester _LoadLogRigesterDataFromFile( string line , string seperator )
+	{
+
+		stLogRigester LogRigester;
+
+		vector<string> vLogRigester;
+		vLogRigester = clsString::Split( line , "#//#" );
+
+		LogRigester.DateTime = vLogRigester[ 0 ];
+		LogRigester.UserName = vLogRigester[ 1 ];
+		LogRigester.FullName = vLogRigester[ 2 ];
+		LogRigester.Password = vLogRigester[ 3 ];
+		LogRigester.Premissions = stoi( vLogRigester[ 4 ] );
+
+
+		return LogRigester;
+
+	}
 	static string _ConverUsaerObjectToLine( clsUsers Client , string Seperator = "#//#" )
 	{
 
@@ -73,6 +94,16 @@ private:
 		stClientRecord += to_string( Client.Premissions() );
 
 		return stClientRecord;
+	}
+	string _PrepareLogInRecord( string Seperator = "#//#" )
+	{
+		string LoginRecord = "";
+		LoginRecord += clsDate::GetSystemDateTimeString() + Seperator;
+		LoginRecord += this->UserName() + Seperator;
+		LoginRecord += this->FullName() + Seperator;
+		LoginRecord += this->Password() + Seperator;
+		LoginRecord += to_string( this->Premissions() );
+		return LoginRecord;
 	}
 	static void _SaveUsersDataToFile( vector<clsUsers> vUsers )
 	{
@@ -133,7 +164,7 @@ private:
 public:
 	enum enPremissions
 	{
-		eAll = -1 , pListClients = 1 , pAddNewClint = 2 , pDeleteClient = 4 , pUpdateClients = 8 , pFindClients = 16 , pTransactions = 32 , pManagUsers = 64
+		eAll = -1 , pListClients = 1 , pAddNewClint = 2 , pDeleteClient = 4 , pUpdateClients = 8 , pFindClients = 16 , pTransactions = 32 , pManagUsers = 64 , pShowLog = 128
 	};
 	enum enSaveResults
 	{
@@ -141,6 +172,16 @@ public:
 		svSucceed = 1 ,
 		svFaildObjectAccountExists = 2
 	};
+	struct stLogRigester
+	{
+		string DateTime;
+		string UserName;
+		string FullName;
+		string Password;
+		int Premissions;
+	};
+
+
 	clsUsers( enMode mode , string firstName , string lastName , string email , string phone , string userName , string password , int premission )
 		: clsPerson( firstName , lastName , email , phone )
 	{
@@ -207,10 +248,7 @@ public:
 		{
 			return user;
 		}
-		else
-		{
-			_getEmptyUSerObject();
-		}
+		return _getEmptyUSerObject();
 	}
 	static clsUsers GetAddNewUserObject( string userName )
 	{
@@ -275,6 +313,51 @@ public:
 	{
 		clsUsers user = clsUsers::Find( userName );
 		return ( !user.isEmpty() );
+	}
+	bool CheckAccessPremission( enPremissions premission )
+	{
+		if ( this->Premissions() == enPremissions::eAll )
+		{
+			return true;
+		}
+		if ( ( premission & this->Premissions() ) == premission )
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	void LogRigester()
+	{
+		string logRecordLine = _PrepareLogInRecord();
+		fstream MyFile;
+		MyFile.open( "LogFile.txt" , ios::out | ios::app );
+
+		if ( MyFile.is_open() )
+		{
+			MyFile << logRecordLine << endl;
+			MyFile.close();
+		}
+	}
+	static vector<stLogRigester> GetLogRigesterList()
+	{
+		vector<stLogRigester> vLogRigester;
+		fstream MyFile;
+		MyFile.open( "LogFile.txt" , ios::in );
+
+		if ( MyFile.is_open() )
+		{
+			string Line;
+			while ( getline( MyFile , Line ) )
+			{
+				stLogRigester logRecord = _LoadLogRigesterDataFromFile( Line , "#//#" );
+				vLogRigester.push_back( logRecord );
+			}
+			MyFile.close();
+		}
+		return vLogRigester;
 	}
 
 };

@@ -52,7 +52,7 @@ private:
 	}
 	static void _showFindUserScreen()
 	{
-		cout << "Find User Will Be Here.." << endl;
+		clsFindClientsScreen::FindClientScreen();
 	}
 	static void _BackToUsersMainMenueScreen()
 	{
@@ -88,6 +88,7 @@ private:
 			break;
 		}
 	}
+
 public:
 
 	static void ManageUsersScreen()

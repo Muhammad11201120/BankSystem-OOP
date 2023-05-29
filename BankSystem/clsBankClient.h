@@ -293,6 +293,18 @@ public:
 			return true;
 		}
 	}
-
+	static bool TransferMoney( clsBankClient& fromClient , clsBankClient& toClient , double amount )
+	{
+		if ( amount > fromClient.Balance() )
+		{
+			return false;
+		}
+		else
+		{
+			fromClient.Withdrow( amount );
+			toClient.Deposit( amount );
+			return true;
+		}
+	}
 
 };

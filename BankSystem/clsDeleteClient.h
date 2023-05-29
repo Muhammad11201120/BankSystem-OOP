@@ -32,6 +32,10 @@ public:
 	static void deleteClientScreen()
 	{
 		system( "cls" );
+		if ( !CheckAccessRights( clsUsers::enPremissions::pDeleteClient ) )
+		{
+			return;
+		}
 		_DrawScreenHeader( "\tDELETE CLIENT SCREEN" );
 		string accountNumber = "";
 		cout << "Enter An Account Number To Delete: ";

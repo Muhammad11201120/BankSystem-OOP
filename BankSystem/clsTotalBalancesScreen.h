@@ -20,6 +20,10 @@ public:
 	static void TotalBalancesScreen()
 	{
 		system( "cls" );
+		if ( !CheckAccessRights( clsUsers::enPremissions::pTransactions ) )
+		{
+			return;
+		}
 		vector<clsBankClient>vClients = clsBankClient::GetClientsList();
 		string title = "TOTAL BALANESE SCREEN";
 		string subTitle = "( " + to_string( vClients.size() ) + " )Client/s";
