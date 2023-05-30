@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\BankSystem"
+    "\\BankSystem",
+    "\\BankSystem\\Debug"
   ],
+  "SelectedNode": "\\BankSystem\\Debug\\Users.txt",
   "PreviewInSolutionExplorer": false
 }

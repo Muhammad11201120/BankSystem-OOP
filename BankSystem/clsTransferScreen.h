@@ -36,21 +36,50 @@ public:
 		_DrawScreenHeader( "TRANSFER SCREEN" );
 		cout << "Enter Account Number To Transfer From ?: ";
 		string transferFromAccountNumber = clsInputValidate::ReadString();
+		while ( !clsBankClient::isClientExists( transferFromAccountNumber ) )
+		{
+			cout << "Enter Account Number To Transfer From ?: ";
+			string transferFromAccountNumber = clsInputValidate::ReadString();
+		}
 		cout << "Enter Account Number To Transfer To ?: ";
 		string transferToAccountNumber = clsInputValidate::ReadString();
-		cout << "How Mutch Do You Want To Transfer ?: ";
-		double transferAmount = clsInputValidate::ReadDblNumber();
+		while ( !clsBankClient::isClientExists( transferToAccountNumber ) )
+		{
+			cout << "Enter Account Number To Transfer To ?: ";
+			string transferToAccountNumber = clsInputValidate::ReadString();
+		}
 
 		clsBankClient ClientFrom = clsBankClient::Find( transferFromAccountNumber );
 		_printClientData( ClientFrom );
 		clsBankClient ClientTo = clsBankClient::Find( transferToAccountNumber );
 		_printClientData( ClientTo );
 
-		if ( clsBankClient::TransferMoney( ClientFrom , ClientTo , transferAmount ) )
+		cout << "How Mutch Do You Want To Transfer ?: ";
+		double transferAmount = clsInputValidate::ReadDblNumber();
+
+		while ( ClientFrom.Balance() < transferAmount )
 		{
-			cout << "Operation Completed Successfully" << endl;
+			cout << "Account Has No Enough Balance To Transfer " << transferAmount << "$" << endl;
+			cout << "How Mutch Do You Want To Transfer ?: ";
+			double transferAmount = clsInputValidate::ReadDblNumber();
+		}
+
+		char confirm;
+		cout << "Are You Sure You Want T Transfer " << transferAmount << "$ From (" << ClientFrom.FullName() << ") To (" << ClientTo.FullName() << ") ? (Y/N): ";
+		cin >> confirm;
+		if ( confirm != 'Y' && confirm != 'y' )
+		{
+			cout << "Operation Canceled .." << endl;
+			return;
+		}
+		if ( ClientFrom.TransferMoney( ClientTo , transferAmount ) )
+		{
+			ClientFrom.TransfersRigester( ClientTo , transferAmount );
 			_printClientData( ClientFrom );
 			_printClientData( ClientTo );
+			ClientFrom.TransfersRigester( ClientTo , transferAmount );
+			cout << "Transfer (" << transferAmount << "$) From (" << ClientFrom.FullName() << ") To (" << ClientTo.FullName() << ")" << endl;
+			cout << "\n\tTransfer Done Successfully .." << endl;
 		}
 		else
 		{

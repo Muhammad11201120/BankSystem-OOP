@@ -74,7 +74,7 @@ private:
 		LogRigester.DateTime = vLogRigester[ 0 ];
 		LogRigester.UserName = vLogRigester[ 1 ];
 		LogRigester.FullName = vLogRigester[ 2 ];
-		LogRigester.Password = vLogRigester[ 3 ];
+		LogRigester.Password = clsUtil::decriptionStr( vLogRigester[ 3 ] , 2 );
 		LogRigester.Premissions = stoi( vLogRigester[ 4 ] );
 
 
@@ -90,7 +90,7 @@ private:
 		stClientRecord += Client.Email() + Seperator;
 		stClientRecord += Client.Phone() + Seperator;
 		stClientRecord += Client.UserName() + Seperator;
-		stClientRecord += Client.Password() + Seperator;
+		stClientRecord += clsUtil::incriptionStr( Client.Password() , 2 ) + Seperator;
 		stClientRecord += to_string( Client.Premissions() );
 
 		return stClientRecord;
@@ -101,7 +101,7 @@ private:
 		LoginRecord += clsDate::GetSystemDateTimeString() + Seperator;
 		LoginRecord += this->UserName() + Seperator;
 		LoginRecord += this->FullName() + Seperator;
-		LoginRecord += this->Password() + Seperator;
+		LoginRecord += clsUtil::incriptionStr( this->Password() , 2 ) + Seperator;
 		LoginRecord += to_string( this->Premissions() );
 		return LoginRecord;
 	}

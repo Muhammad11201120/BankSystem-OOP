@@ -302,4 +302,20 @@ public:
 			return NumberToText( number / 1000000000 ) + "Billions " + NumberToText( number % 1000000000 );
 		}
 	}
+	static string incriptionStr( string str , int incriptionKey = 2 )
+	{
+		for ( int i = 0; i <= str.length(); i++ )
+		{
+			str[ i ] = char( ( int ) str[ i ] + incriptionKey );
+		}
+		return str;
+	}
+	static string decriptionStr( string str , int incriptionKey = 2 )
+	{
+		for ( int i = 0; i <= str.length(); i++ )
+		{
+			str[ i ] = char( ( int ) str[ i ] - incriptionKey );
+		}
+		return str;
+	}
 };

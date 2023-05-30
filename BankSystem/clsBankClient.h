@@ -19,7 +19,38 @@ class clsBankClient : public clsPerson
 	string _accountNumber;
 	float _balance;
 	bool _deleteFlag = false;
+	struct stTransferRigesters;
+	static  stTransferRigesters _LoadTransferRigesterDataFromFile( string line , string seperator )
+	{
 
+		stTransferRigesters LogRigester;
+
+		vector<string> vLogRigester;
+		vLogRigester = clsString::Split( line , "#//#" );
+
+		LogRigester.DateTime = vLogRigester[ 0 ];
+		LogRigester.FromAccount = vLogRigester[ 1 ];
+		LogRigester.ToAccount = vLogRigester[ 2 ];
+		LogRigester.Amount = stod( vLogRigester[ 3 ] );
+		LogRigester.fromAccountBalance = stod( vLogRigester[ 4 ] );
+		LogRigester.ToAccountBalance = stod( vLogRigester[ 5 ] );
+		LogRigester.userName = vLogRigester[ 6 ];
+
+		return LogRigester;
+
+	}
+	string _PrepareTransferRecord( clsBankClient ToAccount , double amount , string Seperator = "#//#" )
+	{
+		string TransferRecord = "";
+		TransferRecord += clsDate::GetSystemDateTimeString() + Seperator;
+		TransferRecord += this->FullName() + Seperator;
+		TransferRecord += ToAccount.FullName() + Seperator;
+		TransferRecord += to_string( amount ) + Seperator;
+		TransferRecord += to_string( this->Balance() ) + Seperator;
+		TransferRecord += to_string( ToAccount.Balance() ) + Seperator;
+		TransferRecord += CurrentUser.UserName();
+		return TransferRecord;
+	}
 	static clsBankClient _convertLineToClientObject( string line , string seperator = "#//#" )
 	{
 		vector<string> vClient;
@@ -133,6 +164,16 @@ public:
 		svFaildEmptyObject = 0 ,
 		svSucceed = 1 ,
 		svFaildObjectAccountExists = 2
+	};
+	struct stTransferRigesters
+	{
+		string DateTime;
+		string FromAccount;
+		string ToAccount;
+		double Amount;
+		double fromAccountBalance;
+		double ToAccountBalance;
+		string userName;
 	};
 	clsBankClient( enMode mode , string firstName , string lastName , string email , string phone , string accountNumber , string pinCode , float balance )
 		: clsPerson( firstName , lastName , email , phone )
@@ -293,18 +334,47 @@ public:
 			return true;
 		}
 	}
-	static bool TransferMoney( clsBankClient& fromClient , clsBankClient& toClient , double amount )
+	bool TransferMoney( clsBankClient& toClient , double amount )
 	{
-		if ( amount > fromClient.Balance() )
+		if ( amount > this->Balance() )
 		{
 			return false;
 		}
 		else
 		{
-			fromClient.Withdrow( amount );
+			this->Withdrow( amount );
 			toClient.Deposit( amount );
 			return true;
 		}
 	}
+	void TransfersRigester( clsBankClient ToAccount , double amount )
+	{
+		string logRecordLine = _PrepareTransferRecord( ToAccount , amount );
+		fstream MyFile;
+		MyFile.open( "TransactionsFile.txt" , ios::out | ios::app );
 
+		if ( MyFile.is_open() )
+		{
+			MyFile << logRecordLine << endl;
+			MyFile.close();
+		}
+	}
+	static vector<stTransferRigesters> GetTransferRigesterList()
+	{
+		vector<stTransferRigesters> vLogRigester;
+		fstream MyFile;
+		MyFile.open( "TransactionsFile.txt" , ios::in );
+
+		if ( MyFile.is_open() )
+		{
+			string Line;
+			while ( getline( MyFile , Line ) )
+			{
+				stTransferRigesters logRecord = _LoadTransferRigesterDataFromFile( Line , "#//#" );
+				vLogRigester.push_back( logRecord );
+			}
+			MyFile.close();
+		}
+		return vLogRigester;
+	}
 };
