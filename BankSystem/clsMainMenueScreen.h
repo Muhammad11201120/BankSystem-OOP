@@ -12,6 +12,7 @@
 #include"clsTransactionScreen.h"
 #include"clsManageUsersScreen.h"
 #include"clsLogRigesterScreen.h"
+#include"clsCuurencyScreen.h"
 #include"Global.h"
 using namespace std;
 class clsMainMenueScreen :protected clsScreen
@@ -21,7 +22,7 @@ private:
 	{
 		eListClients = 1 , eAddNewClient = 2 , eDeleteClient = 3 ,
 		eUpdateClient = 4 , eFindClient = 5 , eShowTransactionsMenue = 6 ,
-		eManageUsers = 7 , eLogRigester = 8 , eExit = 9
+		eManageUsers = 7 , eLogRigester = 8 , eCurrency = 9 , eExit = 10
 	};
 
 	static void PrintClientRecordBalanceLine( clsBankClient Client )
@@ -64,8 +65,8 @@ private:
 	}
 	static short _ReadMainMenueOption()
 	{
-		cout << setw( 40 ) << left << "" << "Choose What You Want To Do From 1 - 9 : ";
-		short choose = clsInputValidate::ReadShortNumberBetween( 1 , 9 );
+		cout << setw( 40 ) << left << "" << "Choose What You Want To Do From 1 - 10 : ";
+		short choose = clsInputValidate::ReadShortNumberBetween( 1 , 10 );
 		return choose;
 	}
 	static void _ShowClientsListScreen()
@@ -99,6 +100,10 @@ private:
 	static void _ShowLogRigesterScreen()
 	{
 		clsLogRigesterScreen::LogRigesterScreen();
+	}
+	static void _showCurrencyScreen()
+	{
+		clsCuurencyScreen::CurrencyScreen();
 	}
 	static void _BackToMainMenueScreen()
 	{
@@ -142,6 +147,10 @@ private:
 			_ShowLogRigesterScreen();
 			_BackToMainMenueScreen();
 			break;
+		case clsMainMenueScreen::enMainMenueOptions::eCurrency:
+			_showCurrencyScreen();
+			_BackToMainMenueScreen();
+			break;
 		case clsMainMenueScreen::enMainMenueOptions::eExit:
 			system( "cls" );
 			_Logout();
@@ -169,7 +178,8 @@ public:
 		cout << setw( 37 ) << left << "" << "\t[6] Transactions.\n";
 		cout << setw( 37 ) << left << "" << "\t[7] Manage Users.\n";
 		cout << setw( 37 ) << left << "" << "\t[8] Show Logs Rigester.\n";
-		cout << setw( 37 ) << left << "" << "\t[9] Logout.\n";
+		cout << setw( 37 ) << left << "" << "\t[9] Currency.\n";
+		cout << setw( 37 ) << left << "" << "\t[10] Logout.\n";
 		cout << setw( 37 ) << left << "" << "===========================================\n";
 
 		_PerformMainMenueOption( ( enMainMenueOptions ) _ReadMainMenueOption() );

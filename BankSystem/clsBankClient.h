@@ -185,7 +185,7 @@ public:
 	}
 	bool isEmpty()
 	{
-		return ( _enMode == enMode::empty );
+		return ( this->_enMode == enMode::empty );
 	}
 	string AccountNumber()
 	{

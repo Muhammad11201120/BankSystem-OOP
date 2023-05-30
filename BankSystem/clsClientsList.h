@@ -24,7 +24,6 @@ public:
 		vector <clsBankClient> vClients = clsBankClient::GetClientsList();
 		string Title = "Client List Screen";
 		string SubTitle = "\t    (" + to_string( vClients.size() ) + ") Client(s).";
-
 		_DrawScreenHeader( Title , SubTitle );
 
 

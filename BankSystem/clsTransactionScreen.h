@@ -7,6 +7,7 @@
 #include"clsTotalBalancesScreen.h"
 #include"clsTransferScreen.h"
 #include"clsTransferLogScreen.h"
+#include"clsCuurencyScreen.h"
 #include <iomanip>
 using namespace std;
 class clsTransaction :protected clsScreen
@@ -19,13 +20,13 @@ private:
 		eTotallBalance = 3 ,
 		eTransfer = 4 ,
 		eTransferLog = 5 ,
-		eBackToMainMenue = 6
+		eBackToMainMenue = 7
 	};
 
 
 	static short _ReadTransactionsOptions()
 	{
-		cout << "Choose What You Want To Do From 1 To 6 ? : ";
+		cout << setw( 37 ) << left << "" << "Choose What You Want To Do From 1 To 6 ? : ";
 		short choice = clsInputValidate::ReadShortNumberBetween( 1 , 6 , "ERROR: Choose Valid Number Between 1 - 6 ? : " );
 		return choice;
 	}
@@ -51,7 +52,9 @@ private:
 	}
 	static void _backToTransacionsScreen()
 	{
-		//todo
+		system( "pause" );
+		system( "cls" );
+		TransactionsScreen();
 	}
 	static void _performTransactionOptions( enTransactionsOptionScreen option )
 	{
@@ -76,8 +79,9 @@ private:
 		case clsTransaction::eTransferLog:
 			_showTransferLogScreen();
 			_backToTransacionsScreen();
+			break;
 		case clsTransaction::eBackToMainMenue:
-			//IT Will Be Handeled By main menue class
+			//Do Nothing
 			break;
 		}
 

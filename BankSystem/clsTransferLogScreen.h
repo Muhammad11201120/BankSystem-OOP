@@ -22,10 +22,6 @@ public:
 	static void TransferRigesterScreen()
 	{
 		system( "cls" );
-		if ( !CheckAccessRights( clsUsers::enPremissions::pShowLog ) )
-		{
-			return;
-		}
 		vector <clsBankClient::stTransferRigesters> vUsers = clsBankClient::GetTransferRigesterList();
 		string Title = "TRANSFER RIGESTER SCREEN";
 		string SubTitle = "\t    (" + to_string( vUsers.size() ) + ") TRANSFERS(S).";
