@@ -23,7 +23,7 @@ private:
 	static short _readUserInputOption()
 	{
 		cout << "Choose What You Want From 1 - 6 ";
-		short choice = clsInputValidate::ReadShortNumberBetween( 1 , 6 , "Please Enter Valid Number Between 1 - 6 " );
+		short choice = clsInputValidate<short>::ReadNumberBetween( 1 , 6 , "Please Enter Valid Number Between 1 - 6 " );
 		return choice;
 	}
 	static void _GoBackToManageUsersMenue()

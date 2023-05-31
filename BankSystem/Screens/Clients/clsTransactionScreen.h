@@ -27,7 +27,7 @@ private:
 	static short _ReadTransactionsOptions()
 	{
 		cout << setw( 37 ) << left << "" << "Choose What You Want To Do From 1 To 6 ? : ";
-		short choice = clsInputValidate::ReadShortNumberBetween( 1 , 6 , "ERROR: Choose Valid Number Between 1 - 6 ? : " );
+		short choice = clsInputValidate<short>::ReadNumberBetween( 1 , 6 , "ERROR: Choose Valid Number Between 1 - 6 ? : " );
 		return choice;
 	}
 	static void _showDepositScreen()

@@ -23,7 +23,7 @@ private:
 	{
 		int choice = 0;
 		cout << setw( 37 ) << left << "" << "Enter your choice: ";
-		choice = clsInputValidate::ReadShortNumberBetween( 1 , 5 , "Invalid choice, please try again: " );
+		choice = clsInputValidate<short>::ReadNumberBetween( 1 , 5 , "Invalid choice, please try again: " );
 		return choice;
 	}
 	static void _ShowCuurenciesList()
@@ -90,7 +90,7 @@ public:
 
 		short choice = 0;
 		cout << setw( 37 ) << left << "" << "Enter your Operation: ";
-		choice = clsInputValidate::ReadShortNumberBetween( 1 , 5 );
+		choice = clsInputValidate<short>::ReadNumberBetween( 1 , 5 );
 		_PerformCurrencyExchange( ( enCuurencyChoice ) choice );
 	}
 };

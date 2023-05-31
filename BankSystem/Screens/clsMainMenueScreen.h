@@ -66,7 +66,7 @@ private:
 	static short _ReadMainMenueOption()
 	{
 		cout << setw( 40 ) << left << "" << "Choose What You Want To Do From 1 - 10 : ";
-		short choose = clsInputValidate::ReadShortNumberBetween( 1 , 10 );
+		short choose = clsInputValidate<short>::ReadNumberBetween( 1 , 10 );
 		return choose;
 	}
 	static void _ShowClientsListScreen()

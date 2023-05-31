@@ -36,11 +36,11 @@ public:
 		_DrawScreenHeader( "DELETE USER SCREEN" );
 		string userName = "";
 		cout << "Enter UserName To Delete: ";
-		userName = clsInputValidate::ReadString();
+		userName = clsInputValidate<string>::ReadString();
 		while ( !clsUsers::isUserExists( userName ) )
 		{
 			cout << "ERROR: NO USER AVAILABLE WITH ENTERED USERNAME \nEnter UserName To Delete: ";
-			userName = clsInputValidate::ReadString();
+			userName = clsInputValidate<string>::ReadString();
 		}
 		clsUsers user = clsUsers::Find( userName );
 		_printUserData( user );

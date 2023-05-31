@@ -9,17 +9,17 @@ private:
 	static clsBankClient _readClientInfo( clsBankClient& client )
 	{
 		cout << "Enter Client First Name: ";
-		client.setFirstName( clsInputValidate::ReadString() );
+		client.setFirstName( clsInputValidate<string>::ReadString() );
 		cout << "Enter Client Last Name: ";
-		client.setLastName( clsInputValidate::ReadString() );
+		client.setLastName( clsInputValidate<string>::ReadString() );
 		cout << "Enter Client Email: ";
-		client.setEmail( clsInputValidate::ReadString() );
+		client.setEmail( clsInputValidate<string>::ReadString() );
 		cout << "Enter Client Phone: ";
-		client.setPhone( clsInputValidate::ReadString() );
+		client.setPhone( clsInputValidate<string>::ReadString() );
 		cout << "Enter Client Pin Code: ";
-		client.setPinCode( clsInputValidate::ReadString() );
+		client.setPinCode( clsInputValidate<string>::ReadString() );
 		cout << "Enter Account Balance: ";
-		client.setBalance( clsInputValidate::ReadDblNumber() );
+		client.setBalance( clsInputValidate<double>::ReadNumber() );
 
 		return client;
 	}
@@ -53,11 +53,11 @@ public:
 		_DrawScreenHeader( "ADD CLIENT SCREEN" );
 		string accountNumber = "";
 		cout << "Enter A Client Account Number: ";
-		accountNumber = clsInputValidate::ReadString();
+		accountNumber = clsInputValidate<string>::ReadString();
 		while ( clsBankClient::isClientExists( accountNumber ) )
 		{
 			cout << "There Is An Account Already With This Account Number..\nEnter Another Account Number..";
-			accountNumber = clsInputValidate::ReadString();
+			accountNumber = clsInputValidate<string>::ReadString();
 		}
 
 		clsBankClient newClient = clsBankClient::GetAddNewClientObject( accountNumber );

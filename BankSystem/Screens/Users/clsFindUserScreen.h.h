@@ -9,18 +9,18 @@ class clsFindUserScreen :protected clsScreen
 {
 
 private:
-	static void _PrintUser( clsUser User )
+	static void _PrintUser( clsUsers User )
 	{
 		cout << "\nUser Card:";
 		cout << "\n___________________";
-		cout << "\nFirstName   : " << User.FirstName;
-		cout << "\nLastName    : " << User.LastName;
+		cout << "\nFirstName   : " << User.FirstName();
+		cout << "\nLastName    : " << User.LastName();
 		cout << "\nFull Name   : " << User.FullName();
-		cout << "\nEmail       : " << User.Email;
-		cout << "\nPhone       : " << User.Phone;
-		cout << "\nUserName    : " << User.UserName;
-		cout << "\nPassword    : " << User.Password;
-		cout << "\nPermissions : " << User.Permissions;
+		cout << "\nEmail       : " << User.Email();
+		cout << "\nPhone       : " << User.Phone();
+		cout << "\nUserName    : " << User.UserName();
+		cout << "\nPassword    : " << User.Password();
+		cout << "\nPermissions : " << User.Premissions();
 		cout << "\n___________________\n";
 
 	}
@@ -34,16 +34,16 @@ public:
 
 		string UserName;
 		cout << "\nPlease Enter UserName: ";
-		UserName = clsInputValidate::ReadString();
-		while ( !clsUser::IsUserExist( UserName ) )
+		UserName = clsInputValidate<string>::ReadString();
+		while ( !clsUsers::isUserExists( UserName ) )
 		{
 			cout << "\nUser is not found, choose another one: ";
-			UserName = clsInputValidate::ReadString();
+			UserName = clsInputValidate<string>::ReadString();
 		}
 
-		clsUser User1 = clsUser::Find( UserName );
+		clsUsers User1 = clsUsers::Find( UserName );
 
-		if ( !User1.IsEmpty() )
+		if ( !User1.isEmpty() )
 		{
 			cout << "\nUser Found :-)\n";
 		}

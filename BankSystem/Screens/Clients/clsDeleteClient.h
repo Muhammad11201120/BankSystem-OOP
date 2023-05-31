@@ -39,12 +39,12 @@ public:
 		_DrawScreenHeader( "\tDELETE CLIENT SCREEN" );
 		string accountNumber = "";
 		cout << "Enter An Account Number To Delete: ";
-		accountNumber = clsInputValidate::ReadString();
+		accountNumber = clsInputValidate<string>::ReadString();
 
 		while ( !clsBankClient::isClientExists( accountNumber ) )
 		{
 			cout << "There Is No Account With This Account Number..\nPlease Enter A Valid Account Number: ";
-			accountNumber = clsInputValidate::ReadString();
+			accountNumber = clsInputValidate<string>::ReadString();
 		}
 		clsBankClient client = clsBankClient::Find( accountNumber );
 		_printClientData( client );

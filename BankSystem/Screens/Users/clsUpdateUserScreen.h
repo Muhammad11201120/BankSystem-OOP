@@ -92,15 +92,15 @@ private:
 	static clsUsers _readUserInfo( clsUsers& user )
 	{
 		cout << "Enter User First Name: ";
-		user.setFirstName( clsInputValidate::ReadString() );
+		user.setFirstName( clsInputValidate<string>::ReadString() );
 		cout << "Enter User Last Name: ";
-		user.setLastName( clsInputValidate::ReadString() );
+		user.setLastName( clsInputValidate<string>::ReadString() );
 		cout << "Enter User Email: ";
-		user.setEmail( clsInputValidate::ReadString() );
+		user.setEmail( clsInputValidate<string>::ReadString() );
 		cout << "Enter User Phone: ";
-		user.setPhone( clsInputValidate::ReadString() );
+		user.setPhone( clsInputValidate<string>::ReadString() );
 		cout << "Enter Password: ";
-		user.setPassword( clsInputValidate::ReadString() );
+		user.setPassword( clsInputValidate<string>::ReadString() );
 		cout << "Enter Permissions: \n" << endl;
 		user.setPremissions( ReadUserPremission() );
 		return user;
@@ -112,11 +112,11 @@ public:
 		_DrawScreenHeader( "UPDATE USER SCREEN" );
 		string userName = "";
 		cout << "Enter UserName To Update: ";
-		userName = clsInputValidate::ReadString();
+		userName = clsInputValidate<string>::ReadString();
 		while ( !clsUsers::isUserExists( userName ) )
 		{
 			cout << "There is No User Available With Entered UserName..\n Please Enter UserName: ";
-			userName = clsInputValidate::ReadString();
+			userName = clsInputValidate<string>::ReadString();
 		}
 
 		clsUsers user = clsUsers::Find( userName );

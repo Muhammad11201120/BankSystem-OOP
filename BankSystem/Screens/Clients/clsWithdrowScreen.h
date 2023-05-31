@@ -35,12 +35,12 @@ public:
 		_DrawScreenHeader( ( "DEPOSIT SCREEN" ) );
 		string accountNumber = "";
 		cout << "Enter An Account Number To Withdrow From: ";
-		accountNumber = clsInputValidate::ReadString();
+		accountNumber = clsInputValidate<string>::ReadString();
 
 		while ( !clsBankClient::isClientExists( accountNumber ) )
 		{
 			cout << "ERROR: Invalid Account Number\n Enter A valid Account Number Please: ";
-			accountNumber = clsInputValidate::ReadString();
+			accountNumber = clsInputValidate<string>::ReadString();
 		}
 
 		clsBankClient client = clsBankClient::Find( accountNumber );
@@ -48,7 +48,7 @@ public:
 
 		double amount = 0;
 		cout << "Enter An Amount To Withdrow?: ";
-		amount = clsInputValidate::ReadDblNumber();
+		amount = clsInputValidate<double>::ReadNumber();
 
 		char answer;
 		cout << "Are You Sure You Want To Withdrow : " << amount << " ?: ( Y | N ) ?";

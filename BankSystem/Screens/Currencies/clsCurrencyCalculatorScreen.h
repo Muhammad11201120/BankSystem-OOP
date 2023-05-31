@@ -21,12 +21,12 @@ private:
 	{
 		string currencyCode = "";
 		cout << "Enter Currency Code To Exchange  : ";
-		currencyCode = clsInputValidate::ReadString();
+		currencyCode = clsInputValidate<string>::ReadString();
 		clsCurrency currency = clsCurrency::FindByCode( currencyCode );
 		while ( !currency.IsCurrencyExist( currencyCode ) )
 		{
 			cout << "ERROR: INVALID CURRENCY CODE !! \nEnter Currency Code To Exchange  : ";
-			currencyCode = clsInputValidate::ReadString();
+			currencyCode = clsInputValidate<string>::ReadString();
 		}
 		return currency;
 	}
@@ -46,7 +46,7 @@ public:
 			double amount = 0;
 			cout << "Enter Amount To Exchange  : ";
 
-			amount = clsInputValidate::ReadDblNumber();
+			amount = clsInputValidate<double>::ReadNumber();
 			double AmountInUsd = currensyFrom.converToUsd( amount );
 			_PrintCurrencyInfo( currensyFrom , "Currency From" );
 

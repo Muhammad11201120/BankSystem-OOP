@@ -35,18 +35,18 @@ public:
 		system( "cls" );
 		_DrawScreenHeader( "TRANSFER SCREEN" );
 		cout << "Enter Account Number To Transfer From ?: ";
-		string transferFromAccountNumber = clsInputValidate::ReadString();
+		string transferFromAccountNumber = clsInputValidate<string>::ReadString();
 		while ( !clsBankClient::isClientExists( transferFromAccountNumber ) )
 		{
 			cout << "Enter Account Number To Transfer From ?: ";
-			string transferFromAccountNumber = clsInputValidate::ReadString();
+			string transferFromAccountNumber = clsInputValidate<string>::ReadString();
 		}
 		cout << "Enter Account Number To Transfer To ?: ";
-		string transferToAccountNumber = clsInputValidate::ReadString();
+		string transferToAccountNumber = clsInputValidate<string>::ReadString();
 		while ( !clsBankClient::isClientExists( transferToAccountNumber ) )
 		{
 			cout << "Enter Account Number To Transfer To ?: ";
-			string transferToAccountNumber = clsInputValidate::ReadString();
+			string transferToAccountNumber = clsInputValidate<string>::ReadString();
 		}
 
 		clsBankClient ClientFrom = clsBankClient::Find( transferFromAccountNumber );
@@ -55,13 +55,13 @@ public:
 		_printClientData( ClientTo );
 
 		cout << "How Mutch Do You Want To Transfer ?: ";
-		double transferAmount = clsInputValidate::ReadDblNumber();
+		double transferAmount = clsInputValidate<double>::ReadNumber();
 
 		while ( ClientFrom.Balance() < transferAmount )
 		{
 			cout << "Account Has No Enough Balance To Transfer " << transferAmount << "$" << endl;
 			cout << "How Mutch Do You Want To Transfer ?: ";
-			double transferAmount = clsInputValidate::ReadDblNumber();
+			double transferAmount = clsInputValidate<double>::ReadNumber();
 		}
 
 		char confirm;

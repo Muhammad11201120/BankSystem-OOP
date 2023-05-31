@@ -40,12 +40,12 @@ public:
 		_DrawScreenHeader( "FIND CLIENT SCREEN" );
 		string accountNumber = "";
 		cout << "Enter An Account Number To Show: ";
-		accountNumber = clsInputValidate::ReadString();
+		accountNumber = clsInputValidate<string>::ReadString();
 
 		while ( !clsBankClient::isClientExists( accountNumber ) )
 		{
 			cout << "There Is No Account With This Account Number..\nPlease Enter A Valid Account Number: ";
-			accountNumber = clsInputValidate::ReadString();
+			accountNumber = clsInputValidate<string>::ReadString();
 		}
 		clsBankClient client = clsBankClient::Find( accountNumber );
 		if ( !client.isEmpty() )

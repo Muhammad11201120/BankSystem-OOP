@@ -11,7 +11,7 @@ private:
 	{
 		double newRate = 0;
 		cout << setw( 37 ) << left << "" << "Enter new rate: ";
-		newRate = clsInputValidate::ReadDblNumber( "\nInvalid rate, please try again: \n" );
+		newRate = clsInputValidate<double>::ReadNumber( "\nInvalid rate, please try again: \n" );
 		return newRate;
 	}
 	static void _PrintCurrencyInfo( clsCurrency Currency )
@@ -32,12 +32,12 @@ public:
 
 		string currencyCode = "";
 		cout << setw( 37 ) << left << "" << "Enter A Currency Code To Update: ";
-		currencyCode = clsInputValidate::ReadString();
+		currencyCode = clsInputValidate<string>::ReadString();
 
 		while ( !clsCurrency::IsCurrencyExist( currencyCode ) )
 		{
 			cout << setw( 37 ) << left << "" << "Currency Is Not Found Please Enter Another One:  ";
-			currencyCode = clsInputValidate::ReadString();
+			currencyCode = clsInputValidate<string>::ReadString();
 		}
 		clsCurrency currency = clsCurrency::FindByCode( currencyCode );
 		_PrintCurrencyInfo( currency );
