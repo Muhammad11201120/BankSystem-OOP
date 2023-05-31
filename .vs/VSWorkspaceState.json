@@ -1,8 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\BankSystem",
-    "\\BankSystem\\Debug"
+    "\\BankSystem"
   ],
   "SelectedNode": "\\BankSystem\\BankSystem.cpp",
   "PreviewInSolutionExplorer": false
